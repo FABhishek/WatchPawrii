@@ -1,0 +1,80 @@
+.App {
+  text-align: center;
+  background-color: #282c34;
+  min-height: 100vh;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.navbar
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    height: 60px;
+}
+
+.NavColor
+{
+  background-color: #FFD700;
+  text-align: center;
+}
+
+.textColor
+{
+  color:rgb(15, 15, 1); 
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+.AppMid
+{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.Buttons
+{
+  margin: 0;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.Join
+{
+  color : wheat !important;
+  background-color: rgb(54, 186, 52) !important;
+  padding:20 !important;
+  margin-top: 50px !important;
+  margin-right: 7rem !important;
+  border-radius: 15px !important;
+  font-weight: 700 !important;
+}
+
+.Create
+{
+  color : wheat !important;
+  background-color: rgb(178, 59, 85) !important;
+  padding:20 !important;
+  margin-top: 50px !important;
+  margin-left: 10rem !important;
+  border-radius: 15px !important;
+  font-weight: 700 !important;
+}
+
+.btn:hover 
+{
+  background-color: #FFD700 !important;
+  color: rgb(0, 0, 0) !important;
+  font-size: 17px;
+  font-weight: bolder;
+} 
