@@ -29,6 +29,7 @@
   text-decoration: none;
   box-sizing: border-box;
 }
+
 .AppMid
 {
   margin: 0;
@@ -41,40 +42,43 @@
 
 .Buttons
 {
-  margin: 0;
+  /* margin: 0; */
   position: absolute;
+  width: 500px;
+  height: 70px;
   top: 70%;
   left: 50%;
+  display: flex;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  justify-content: space-between;
 }
 
 .Join
 {
   color : wheat !important;
-  background-color: rgb(54, 186, 52) !important;
-  padding:20 !important;
-  margin-top: 50px !important;
-  margin-right: 7rem !important;
+  background-color: rgb(67, 142, 66) !important;
   border-radius: 15px !important;
   font-weight: 700 !important;
+  width:10rem;
+  margin-left:20px;
 }
 
 .Create
 {
   color : wheat !important;
   background-color: rgb(178, 59, 85) !important;
-  padding:20 !important;
-  margin-top: 50px !important;
-  margin-left: 10rem !important;
+  padding:12px !important;
   border-radius: 15px !important;
   font-weight: 700 !important;
+  width:10rem;
+  margin-right:20px;
 }
 
 .btn:hover 
 {
   background-color: #FFD700 !important;
-  color: rgb(0, 0, 0) !important;
-  font-size: 17px;
-  font-weight: bolder;
+  color: #282c34!important;
+  font-size: 20px;
+  font-weight: bolder !important;
 } 
