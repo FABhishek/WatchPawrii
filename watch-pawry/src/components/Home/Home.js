@@ -1,9 +1,7 @@
-// import { Modal, Button } from "react-bootstrap";
 import React from "react";
-// import { useState } from "react";
-import styled from "styled-components";
-
-const frontPage = (
+import "./Home.css";
+const Home = () => {
+  return (
     <div className="App">
       <nav className="navbar NavColor">
         <a className="textColor" href="#">
@@ -16,17 +14,16 @@ const frontPage = (
         </h1>
       </div>
       <div className="Buttons">
-        <button type="button" className="btn Join">
-          Join Room
+        <button type="button" className="bt Join">
+          <a href="/modal"> Join room</a>
         </button>
 
-        <button  type="button" className="btn Create">
-          Create Room
+        <button type="button" className="bt Create">
+          <a href="/modal"> Create Room</a>
         </button>
       </div>
     </div>
-);
+  );
+};
 
-const lobbyArea = (<div></div>);
-
-export { frontPage };
+export default Home;

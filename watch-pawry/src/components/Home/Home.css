@@ -1,0 +1,85 @@
+.App {
+  text-align: center;
+  background-color: #282c34;
+  min-height: 100vh;
+  /* font-size: calc(10px + 2vmin); */
+  color: white;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  height: 60px;
+}
+
+.NavColor {
+  background-color: #ffd700;
+  text-align: center;
+}
+
+.textColor {
+  color: rgb(15, 15, 1);
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.AppMid {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.Buttons {
+  /* margin: 0; */
+  position: absolute;
+  width: 500px;
+  height: 70px;
+  top: 70%;
+  left: 50%;
+  display: flex;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  justify-content: space-between;
+}
+
+.Join {
+  color: wheat;
+  background-color: rgb(67, 142, 66);
+  border-radius: 15px;
+  font-weight: 700;
+  width: 10rem;
+  margin-left: 20px;
+}
+
+.Create {
+  color: wheat;
+  background-color: rgb(178, 59, 85);
+  padding: 12px;
+  border-radius: 15px;
+  font-weight: 700;
+  width: 10rem;
+  margin-right: 20px;
+}
+
+.bt:hover {
+  background-color: #ffd700;
+  color: #282c34;
+  font-size: 20px;
+  /* font-weight: bolder; */
+}
+
+.bt a {
+  text-decoration: none;
+  color: wheat;
+}
+
+.bt:hover a {
+  color: #282c34;
+}
