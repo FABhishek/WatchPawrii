@@ -42,15 +42,15 @@ const Home = () => {
         closeTimeoutMS={500}
       >
       <div class="Modal">
-		      <span class="close-button">x</span>
+		      <span onClick={toggleModal} class="close-button">x</span>
 		      <h1 class="mtext">Enter Room Code</h1>
 		      <form class="formR">
             <label for="roomId"></label>
-            <input type="text" id="roomId" name="roomId"></input>
+            <input type="text" id="roomId" name="roomId" class="inTput"></input>
           </form><br></br>
-          <div class="button">
-            <button onClick={toggleModal}>Join</button>
-          </div> 
+          <div class="joinbutton">
+          <button onClick={toggleModal} class="join-Button">Join</button>
+          </div>
       </div>
       </Modal>
     </div>

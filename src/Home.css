@@ -91,7 +91,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: lightgray;
+  background: #282c34;
   padding: 1rem, 1.5rem;
   width: 24rem;
   border-radius: 0.5rem;
@@ -101,12 +101,19 @@
   text-align: center;
   padding-top: 5%;
   padding-left: 2%;
+  color: wheat;
 }
 
 .formR{
+  padding-top: 2%;
   text-align: center;
   padding-right: 7%;
- }
+  transform: scale(1.2);
+}
+
+.inTput {
+  background-color: wheat;
+}
 
 .close-button {
   float: right;
@@ -115,16 +122,44 @@
   text-align: center;
   cursor: pointer;
   border-radius: 0.25rem;
+  color: black;
 }
 
-.close-button:hover {
-  background-color: yellow;
-}
-
-.button {
+.buttonJoin {
   text-align: center;
   padding-bottom: 2%;
   padding-right: 5%;
+}
+
+
+.close-button{
+  border-color: transparent;
+}
+
+.close-button:hover
+{
+  border-radius: 2px;
+  font-size: 30px; 
+}
+
+
+.joinbutton {
+  text-align: center;
+  padding-right: 6%;
+  padding-bottom: 2%;
+  transform: scale(1.1);
+}
+
+.join-Button {
+  background-color: rgb(178, 59, 85);
+  font-size: large;
+  width: 4rem;
+  color: wheat;
+}
+
+
+.join-Button:hover {
+  color: black;
 }
 
 .myoverlay {
@@ -134,4 +169,19 @@
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.75);
+}
+
+.CloseBT{
+  float:right;
+  border-color: transparent;
+  background-color: lightgray ;
+  margin-top: 5px;
+  margin-right:2px;
+}
+
+.CloseBT:hover
+{
+  border-radius: 2px;
+  /* border-color : lightgrey; */
+  font-size: 30px; 
 }
