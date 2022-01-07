@@ -117,14 +117,26 @@
   border-radius: 0.25rem;
 }
 
-.close-button:hover {
-  background-color: yellow;
-}
-
-.button {
+.buttonJoin {
   text-align: center;
   padding-bottom: 2%;
   padding-right: 5%;
+}
+
+
+.CloseBT{
+  float:right;
+  border-color: transparent;
+  background-color: lightgray ;
+  margin-top: 5px;
+  margin-right:2px;
+}
+
+.CloseBT:hover
+{
+  border-radius: 2px;
+  /* border-color : lightgrey; */
+  font-size: 30px; 
 }
 
 .myoverlay {
@@ -135,3 +147,4 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.75);
 }
+
