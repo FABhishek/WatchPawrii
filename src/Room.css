@@ -1,4 +1,52 @@
-.leave-btn {
-    color: black;
-    text-decoration: none;
+.content {
+    display: flex;
+    min-height: calc(100% - 60px);
+  }
+  
+
+ .ldbtn {
+     margin-left:20px;
+     background-color: rgb(183, 55, 119);
+     color: wheat;
+     height: 50px;
+     padding : 5px;
+     width: 9.3rem;
+     border-radius: 15px;
+     transform : scale(1.05);
+     font-family: monospace;
+ } 
+ .ldbtn:hover
+ {
+    font-size: 18px;
+ }
+  /* Video-container */
+.video-container {
+    flex: 3;
+    padding: 30px;
 }
+  
+.video-container .search-form {
+    display: flex;
+    margin-bottom: 30px;
+}
+  
+.video-container .search-form input {
+    width: 100%;
+    padding: 5px;
+    height: 50px;
+    border-radius: 15px;
+    font-family: monospace;
+    background-color: lightgrey;
+}
+  
+.video-container #player {
+    width: 100%;
+    height: 590px;
+}
+  
+  /* Sidebar */
+.sidebar {
+    flex: 1.3;
+    border-left: 2px solid black;
+}
+  

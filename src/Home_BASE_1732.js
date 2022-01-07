@@ -2,7 +2,7 @@ import { useState,React} from "react";
 import "./Home.css";
 // import Modal from "../Modal/modal";
 import Modal from "react-modal";
-import "./Home.css";
+import "./Home.css"
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <div className="App">
       <nav className="navbar NavColor">
-        <a className="textColor" href="/">
+        <a className="textColor" href="#">
           <h1>WatchPawri!!!!</h1>
         </a>
       </nav>
@@ -24,12 +24,12 @@ const Home = () => {
         </h1>
       </div>
       <div className="Buttons">
-        <button onClick = {toggleModal} type="button" className="bt Join">
+        <button onClick={toggleModal} type="button" className="bt Join">
          Join room
         </button>
 
-       <button onClick = {event => window.location.href = "/room"} type="button" className="bt Create">
-         Create Room
+        <button type="button" className="bt Create">
+        Create Room
         </button>
       </div>
    
@@ -39,16 +39,17 @@ const Home = () => {
         contentLabel="My dialog"
         className="mymodal"
         overlayClassName="myoverlay"
-        closeTimeoutMS={50}
+        closeTimeoutMS={500}
       >
       <div class="Modal">
-		    <span onClick={toggleModal} class="close-button">X</span>
+		      <span onClick={toggleModal} class="close-button">x</span>
 		      <h1 class="mtext">Enter Room Code</h1>
 		      <form class="formR">
-            <input type="text" id="roomId" name="roomId" placeholder = "Room ID..." class="inTput"></input>
+            <label for="roomId"></label>
+            <input type="text" id="roomId" name="roomId" class="inTput"></input>
           </form><br></br>
           <div class="joinbutton">
-          <button class="join-Button">Join</button>
+          <button onClick={toggleModal} class="join-Button">Join</button>
           </div>
       </div>
       </Modal>
