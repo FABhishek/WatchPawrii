@@ -28,7 +28,8 @@ const Home = () => {
          Join room
         </button>
 
-        <button type="button" className="bt Create">
+        <button onClick = {event => window.location.href="/room"}
+        type="button" className="bt Create">
         Create Room
         </button>
       </div>
@@ -39,17 +40,17 @@ const Home = () => {
         contentLabel="My dialog"
         className="mymodal"
         overlayClassName="myoverlay"
-        closeTimeoutMS={500}
+        closeTimeoutMS={100}
       >
-      <div class="Modal">
-		      <span onClick={toggleModal} class="close-button">x</span>
-		      <h1 class="mtext">Enter Room Code</h1>
-		      <form class="formR">
-            <label for="roomId"></label>
-            <input type="text" id="roomId" name="roomId" class="inTput"></input>
+      <div className="Modal">
+		      <span onClick={toggleModal} className="close-button">x</span>
+		      <h1 className="mtext">Enter Room Code</h1>
+		      <form className="formR">
+            <input type="text" id="roomId" name="roomId" 
+            placeholder="Room ID..." className="inTput"></input>
           </form><br></br>
-          <div class="joinbutton">
-          <button onClick={toggleModal} class="join-Button">Join</button>
+          <div className="joinbutton">
+          <button className="join-Button">Join</button>
           </div>
       </div>
       </Modal>
