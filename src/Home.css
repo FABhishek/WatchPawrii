@@ -27,6 +27,15 @@
   box-sizing: border-box;
 }
 
+.textColor:hover
+{
+  color: rgb(72, 72, 69);
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  box-sizing: border-box; 
+}
+
 .AppMid {
   margin: 0;
   position: absolute;
@@ -112,7 +121,7 @@
 }
 
 .inTput {
-  background-color: wheat;
+  background-color: lightgrey;
 }
 
 .close-button {
@@ -133,13 +142,14 @@
 
 
 .close-button{
-  border-color: transparent;
+  color:wheat;
 }
 
 .close-button:hover
 {
   border-radius: 2px;
-  font-size: 30px; 
+  font-size: 25px; 
+  color:rgb(178, 59, 85);
 }
 
 
@@ -155,6 +165,8 @@
   font-size: large;
   width: 4rem;
   color: wheat;
+  border-radius: 10px;
+  padding : 4px;
 }
 
 
@@ -177,11 +189,12 @@
   background-color: lightgray ;
   margin-top: 5px;
   margin-right:2px;
+  color: white;
 }
 
 .CloseBT:hover
 {
   border-radius: 2px;
-  /* border-color : lightgrey; */
+  border-color : lightgrey;
   font-size: 30px; 
 }
