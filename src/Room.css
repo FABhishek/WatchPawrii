@@ -44,7 +44,7 @@
 }
   
 .video-container #player {
-   height: 620px;
+   /* height: 620px; */
    display: flex;
    margin: 15px auto;
    max-width: 1000px;
@@ -57,3 +57,46 @@
     border-left: 2px solid black;
 }
   
+.play-pause
+{
+   color:white;
+}
+
+.chat-controls
+{
+    display:flex;
+    margin-top:58px;
+    margin-left:10px;
+    margin-right:10px;
+    border-radius: 5px;
+    justify-content: center;
+    background-color:black;
+    justify-content: space-between;
+    height:60px;
+    overflow: hidden;
+}
+.controls
+{
+    padding:5px;
+    margin:5px;
+    border-radius: 15px;
+    color:lightgrey;
+    width:80px;
+    font-family: monospace;
+}
+.controls:hover
+{
+    font-size:20px;
+}
+
+.chat
+{
+    background-color:rgb(31, 118, 51);
+}
+.video {
+     background-color:rgb(36, 105, 166);
+}
+
+.users{
+    background-color:rgb(181, 103, 40)
+}

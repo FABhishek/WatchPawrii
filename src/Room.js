@@ -4,10 +4,13 @@ import "./Room.css";
 import "./Home.css";
 import "font-awesome/css/font-awesome.min.css";
 import ReactPlayer from "react-player";
+import PlayArrowIcon from "@material-ui/icons/PlayArrow";
+import { IconButton } from "@material-ui/core";
+import PauseIcon from "@material-ui/icons/Pause";
 
 function Room() {
   const [link, setLink] = useState("");
-  const [playing, setPlaying, PauseIcon] = useState(true)
+  const [playing, setPlaying] = useState(true);
 
   const getLink = (event) => {
     event.preventDefault();
@@ -37,31 +40,28 @@ function Room() {
             </button>
           </form>
           <div id="player">
-            <ReactPlayer url={link}
-             width='100%'
-             height='100%' 
-            //  style={{display:"none"}}
-             controls={false}
-             playing={playing}
-            //  wrapper={"audio"}
-            //  progressInterval={200}
-            //  config={{
-            //    file: {
-            //      attributes: {preload: "auto"},
-            //      forceAudio:true,
-            //    },
-            //  }}
-         />
-         <button size="small">
-             {playing? (
-               <button onClick={() => setPlaying(false)}/>
-             ) : (
-               <button onClick={() => setPlaying(true)}/>
-             )}
-         </button>
+            <ReactPlayer
+              url={link}
+              width="100%"
+              height="50%"
+              controls={false}
+              playing={playing}
+            />
           </div>
+          <IconButton className="play-pause" size="small">
+          {playing ? (
+            <PlayArrowIcon onClick={() => setPlaying(false)} />
+          ) : (
+            <PauseIcon onClick={() => setPlaying(true)} />
+          )}
+        </IconButton>
         </div>
         <div className="sidebar">
+          <div className="chat-controls">
+            <button className="controls chat">chat</button>
+            <button className="controls video">video</button>
+            <button className="controls users">users</button>
+          </div>
           <div className="username-form"></div>
         </div>
       </div>
