@@ -3,7 +3,6 @@
     min-height: calc(100% - 60px);
   }
   
-
  .ldbtn {
      margin-left:20px;
      background-color: rgb(183, 55, 119);
@@ -15,22 +14,27 @@
      transform : scale(1.05);
      font-family: monospace;
  } 
+ 
  .ldbtn:hover
  {
     font-size: 18px;
  }
   /* Video-container */
 .video-container {
-    flex: 3;
+    flex: 2.8;
     padding: 30px;
 }
-  
-.video-container .search-form {
-    display: flex;
-    margin-bottom: 30px;
+
+.search-form {
+  display: flex;
+  margin: 15px auto;
+  max-width: 1000px;
+  width: 100%;
+  background-color: black;
 }
   
 .video-container .search-form input {
+    max-width: 1000px;
     width: 100%;
     padding: 5px;
     height: 50px;
@@ -40,8 +44,11 @@
 }
   
 .video-container #player {
-    width: 100%;
-    height: 590px;
+   height: 620px;
+   display: flex;
+   margin: 15px auto;
+   max-width: 1000px;
+   width: 100%;
 }
   
   /* Sidebar */
