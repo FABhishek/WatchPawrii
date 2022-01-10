@@ -159,6 +159,8 @@
 
 .join-Button {
   background-color: rgb(178, 59, 85);
+  border-radius: 10px;
+  padding: 4px;
   font-size: large;
   width: 4rem;
   color: wheat;
