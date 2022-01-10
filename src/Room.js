@@ -49,12 +49,12 @@ function Room() {
             />
           </div>
           <IconButton className="play-pause" size="small">
-          {playing ? (
-            <PlayArrowIcon onClick={() => setPlaying(false)} />
-          ) : (
-            <PauseIcon onClick={() => setPlaying(true)} />
-          )}
-        </IconButton>
+            {playing ? (
+              <PlayArrowIcon onClick={() => setPlaying(false)} />
+            ) : (
+              <PauseIcon onClick={() => setPlaying(true)} />
+            )}
+          </IconButton>
         </div>
         <div className="sidebar">
           <div className="chat-controls">
