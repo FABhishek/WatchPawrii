@@ -27,13 +27,12 @@
   box-sizing: border-box;
 }
 
-.textColor:hover
-{
+.textColor:hover {
   color: rgb(72, 72, 69);
   margin: 0;
   padding: 0;
   text-decoration: none;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
 .AppMid {
@@ -113,11 +112,12 @@
   color: wheat;
 }
 
-.formR{
-  padding-top: 2%;
+.formR {
+  /* padding-top: 2%; */
   text-align: center;
-  padding-right: 7%;
+  /* padding-right: 7%; */
   transform: scale(1.2);
+  margin: 9%;
 }
 
 .inTput {
@@ -140,18 +140,15 @@
   padding-right: 5%;
 }
 
-
-.close-button{
-  color:wheat;
+.close-button {
+  color: wheat;
 }
 
-.close-button:hover
-{
+.close-button:hover {
   border-radius: 2px;
-  font-size: 25px; 
-  color:rgb(178, 59, 85);
+  font-size: 25px;
+  color: rgb(178, 59, 85);
 }
-
 
 .joinbutton {
   text-align: center;
@@ -162,13 +159,14 @@
 
 .join-Button {
   background-color: rgb(178, 59, 85);
+  border-radius: 10px;
+  padding: 4px;
   font-size: large;
   width: 4rem;
   color: wheat;
   border-radius: 10px;
-  padding : 4px;
+  padding: 4px;
 }
-
 
 .join-Button:hover {
   color: black;
@@ -183,18 +181,17 @@
   background-color: rgba(0, 0, 0, 0.75);
 }
 
-.CloseBT{
-  float:right;
+.CloseBT {
+  float: right;
   border-color: transparent;
-  background-color: lightgray ;
+  background-color: lightgray;
   margin-top: 5px;
-  margin-right:2px;
+  margin-right: 2px;
   color: white;
 }
 
-.CloseBT:hover
-{
+.CloseBT:hover {
   border-radius: 2px;
-  border-color : lightgrey;
-  font-size: 30px; 
+  border-color: lightgrey;
+  font-size: 30px;
 }

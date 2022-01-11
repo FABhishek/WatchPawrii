@@ -3,13 +3,20 @@ import { useState } from "react";
 import "./Room.css";
 import "./Home.css";
 import "font-awesome/css/font-awesome.min.css";
+import FontAwesome from "react-fontawesome";
 import ReactPlayer from "react-player";
-import PlayArrowIcon from "@material-ui/icons/PlayArrow";
-import { IconButton } from "@material-ui/core";
-import PauseIcon from "@material-ui/icons/Pause";
 
 function Room() {
+  const [vidLink, getVidLink] = useState("");
   const [link, setLink] = useState("");
+<<<<<<< HEAD
+=======
+
+  const setTheLink = ({ target }) => {
+    setLink(vidLink);
+  };
+
+>>>>>>> 4b6611b1b265e20b4bcad7b8faf95a62d1328b64
   const [playing, setPlaying] = useState(false);
 
   const getLink = (event) => {
@@ -23,7 +30,8 @@ function Room() {
           <h1>WatchPawri!!!!</h1>
         </a>
         <a className="textColor" href="/">
-          <i class="fa-solid fa-wrench-simple"></i>Leave Room
+          <FontAwesome className="fas fa-sign-out alt" name="sign out" />
+          Exit
         </a>
       </nav>
       <div className="content">
@@ -31,11 +39,11 @@ function Room() {
           <form onSubmit={getLink} className="search-form">
             <input
               type="text"
-              value={link}
-              onChange={(e) => setLink(e.target.value)}
+              value={vidLink}
+              onChange={(e) => getVidLink(e.target.value)}
               placeholder="Enter any URL"
             />
-            <button type="submit" class="ldbtn">
+            <button type="submit" class="ldbtn" onClick={setTheLink}>
               Load
             </button>
           </form>
@@ -48,13 +56,28 @@ function Room() {
               playing={playing}
             />
           </div>
-          <IconButton className="play-pause" size="small">
+          {/* <IconButton className="play-pause" size="small">
           {playing ? (
             <PlayArrowIcon onClick={() => setPlaying(false)} />
           ) : (
             <PauseIcon onClick={() => setPlaying(true)} />
           )}
-        </IconButton>
+        </IconButton>  */}
+          <button className="play-pause" size="small" id="playbtn">
+            {playing ? (
+              <FontAwesome
+                className="fa-solid fa-circle-play"
+                name="play"
+                onClick={() => setPlaying(false)}
+              />
+            ) : (
+              <FontAwesome
+                className="fa-solid fa-circle-pause"
+                name="pause"
+                onClick={() => setPlaying(true)}
+              />
+            )}
+          </button>
         </div>
         <div className="sidebar">
           <div className="chat-controls">
