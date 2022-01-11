@@ -44,7 +44,7 @@
 }
   
 .video-container #player {
-   /* height: 620px; */
+   height: 620px;
    display: flex;
    margin: 15px auto;
    max-width: 1000px;
@@ -60,6 +60,7 @@
 .play-pause
 {
    color:white;
+   position: absolute;
 }
 
 .chat-controls

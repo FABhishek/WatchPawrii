@@ -10,7 +10,7 @@ import PauseIcon from "@material-ui/icons/Pause";
 
 function Room() {
   const [link, setLink] = useState("");
-  const [playing, setPlaying] = useState(true);
+  const [playing, setPlaying] = useState(false);
 
   const getLink = (event) => {
     event.preventDefault();
@@ -43,7 +43,7 @@ function Room() {
             <ReactPlayer
               url={link}
               width="100%"
-              height="50%"
+              height="100%"
               controls={false}
               playing={playing}
             />
