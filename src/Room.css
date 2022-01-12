@@ -22,17 +22,19 @@
 .video-container {
   flex: 2.8;
   padding: 30px;
+  margin:15px;
 }
 
 .search-form {
   display: flex;
-  margin: 15px auto;
   max-width: 1000px;
   width: 100%;
+  min-width: calc(100% - 0px);
+  margin-bottom: 10px;;
 }
 
 .video-container .search-form input {
-  max-width: 1000px;
+  max-width: 1200px;
   width: 100%;
   padding: 5px;
   height: 50px;
@@ -42,28 +44,19 @@
 }
 
 .video-container #player {
-  height: 590px;
+  height: 645px;
   display: flex;
-  max-width: 10000px;
+  max-width: 1150px;
   width: 100%;
-  padding-left:16px;
-  padding-right:20px;
-}
-
-/* Sidebar */
-.sidebar {
-  flex: 1.3;
-  border-left: 2px solid black;
 }
 
 .play-pause {
   background-color: #282c34;
   display: block;
-  justify-content: center;
   border:none;
-  padding-left:15px;
-  padding-top:4px;
-  font-size: 30px;
+  padding:0px 0px 0px 0px;
+  font-size: 27px;
+  margin-top:4px;
 }
 
 .fa-circle-pause{
@@ -71,6 +64,12 @@
 }
 .fa-circle-play{
     color:white;
+}
+
+/* Sidebar */
+.sidebar {
+    flex: 1.3;
+    border-left: 2px solid black;
 }
 
 .chat-controls {
@@ -113,7 +112,7 @@
     padding: 0 0 0 0;
     display: flex;
     flex-direction: column;
-    min-height: calc(100% - 120px);
+    min-height: calc(100% - 130px);
 
   }
   

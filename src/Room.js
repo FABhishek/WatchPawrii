@@ -24,6 +24,7 @@ function Room() {
   // msg dissapper funtionality
   const sendMessage = useRef(null); // replacement of document.queryslecetor from vanilla.js
   const cleanMessage = () => {
+    console.log( sendMessage.current.value);
     //const msg = sendMessage.current.value;
     // Socket.emit('chatMessage',msg); // emitting message using socket
 
@@ -52,7 +53,7 @@ function Room() {
               onChange={(e) => getVidLink(e.target.value)}
               placeholder="Enter any valid URL ..."
             />
-            <button class="ldbtn" onClick={setTheLink}>
+            <button className="ldbtn" onClick={setTheLink}>
               Load
             </button>
           </form>
@@ -83,9 +84,9 @@ function Room() {
         </div>
         <div className="sidebar">
           <div className="chat-controls">
-            <button className="controls chat">chat</button>
-            <button className="controls video">video</button>
-            <button className="controls users">users</button>
+            <button className="controls chat">Chat</button>
+            <button className="controls video">Audio</button>
+            <button className="controls users">Users</button>
           </div>
 
           <div className="chat-container">
@@ -98,16 +99,17 @@ function Room() {
                   type="text"
                   // id="msg"
                   placeholder="Enter the Message"
-                  autocomplete="off"
+                  autoComplete="off"
                   required
                   ref={sendMessage}
                 />
-                <button onClick={cleanMessage} type="button" class="btn-snd">
+                <button onClick={cleanMessage} type="button" className="btn-snd">
                   <FontAwesome className="fa fa-send" />
                 </button>
               </form>
             </div>
           </div>
+        
         </div>
       </div>
     </div>
