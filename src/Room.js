@@ -1,16 +1,17 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "./Room.css";
 import "./Home.css";
 import "font-awesome/css/font-awesome.min.css";
 import FontAwesome from "react-fontawesome";
 import ReactPlayer from "react-player";
+import { Socket } from "socket.io-client";
 
 function Room() {
   const [vidLink, getVidLink] = useState("");
   const [link, setLink] = useState("");
 
-  const setTheLink = ({ target }) => {
+  const setTheLink = (e) => {
     setLink(vidLink);
   };
 
@@ -18,6 +19,17 @@ function Room() {
 
   const getLink = (event) => {
     event.preventDefault();
+  };
+
+  // msg dissapper funtionality
+  const sendMessage = useRef(null); // replacement of document.queryslecetor from vanilla.js
+  const cleanMessage = () => {
+    console.log( sendMessage.current.value);
+    //const msg = sendMessage.current.value;
+    // Socket.emit('chatMessage',msg); // emitting message using socket
+
+    sendMessage.current.value = "";
+    sendMessage.current.focus();
   };
 
   return (
@@ -35,12 +47,13 @@ function Room() {
         <div className="video-container">
           <form onSubmit={getLink} className="search-form">
             <input
+              autoFocus
               type="text"
               value={vidLink}
               onChange={(e) => getVidLink(e.target.value)}
-              placeholder="Enter any URL"
+              placeholder="Enter any valid URL ..."
             />
-            <button type="submit" class="ldbtn" onClick={setTheLink}>
+            <button className="ldbtn" onClick={setTheLink}>
               Load
             </button>
           </form>
@@ -53,13 +66,6 @@ function Room() {
               playing={playing}
             />
           </div>
-          {/* <IconButton className="play-pause" size="small">
-          {playing ? (
-            <PlayArrowIcon onClick={() => setPlaying(false)} />
-          ) : (
-            <PauseIcon onClick={() => setPlaying(true)} />
-          )}
-        </IconButton>  */}
           <button className="play-pause" size="small" id="playbtn">
             {playing ? (
               <FontAwesome
@@ -78,11 +84,32 @@ function Room() {
         </div>
         <div className="sidebar">
           <div className="chat-controls">
-            <button className="controls chat">chat</button>
-            <button className="controls video">video</button>
-            <button className="controls users">users</button>
+            <button className="controls chat">Chat</button>
+            <button className="controls video">Audio</button>
+            <button className="controls users">Users</button>
           </div>
-          <div className="username-form"></div>
+
+          <div className="chat-container">
+            <div className="chat-main">
+              <div className="chat-messages"></div>
+            </div>
+            <div className="chat-form-container">
+              <form id="chat-form">
+                <input
+                  type="text"
+                  // id="msg"
+                  placeholder="Enter the Message"
+                  autoComplete="off"
+                  required
+                  ref={sendMessage}
+                />
+                <button onClick={cleanMessage} type="button" className="btn-snd">
+                  <FontAwesome className="fa fa-send" />
+                </button>
+              </form>
+            </div>
+          </div>
+        
         </div>
       </div>
     </div>

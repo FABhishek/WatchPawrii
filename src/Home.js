@@ -1,6 +1,5 @@
-import { useState, React } from "react";
+import { useState } from "react";
 import "./Home.css";
-// import Modal from "../Modal/modal";
 import Modal from "react-modal";
 import "./Home.css";
 
@@ -49,33 +48,29 @@ const Home = () => {
         overlayClassName="myoverlay"
         closeTimeoutMS={50}
       >
-        <div class="Modal">
-          <span onClick={toggleModal} class="close-button">
+        <div className="Modal">
+          <span onClick={toggleModal} className="close-button">
             X
           </span>
-          <h1 class="mtext">Enter Room Code</h1>
-          <form class="formR" onSubmit={getRoomID}>
+          <h1 className="mtext">Enter Room Code</h1>
+          <form className="formR" onSubmit={getRoomID}>
             <input
               type="text"
               id="roomId"
               name="roomId"
               placeholder="Room ID..."
-              class="inTput"
+              className="inTput"
               onChange={(e) => setroomId(e.target.value)}
             />
-
-            {/* <br></br> */}
-            {/* <div class="joinbutton"> */}
             <button
               type="submit"
-              class="join-Button"
+              className="join-Button"
               onClick={(event) =>
                 (window.location.href = "/room/:Id=" + roomId)
               }
             >
               Join
             </button>
-            {/* </div> */}
           </form>
         </div>
       </Modal>
