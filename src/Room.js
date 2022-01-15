@@ -5,7 +5,7 @@ import "./Home.css";
 import "font-awesome/css/font-awesome.min.css";
 import FontAwesome from "react-fontawesome";
 import ReactPlayer from "react-player";
-import { Socket } from "socket.io-client";
+import ChatBox from "./ChatBox";
 
 function Room() {
   const [vidLink, getVidLink] = useState("");
@@ -23,8 +23,9 @@ function Room() {
 
   // msg dissapper funtionality
   const sendMessage = useRef(null); // replacement of document.queryslecetor from vanilla.js
-  const cleanMessage = () => {
-    console.log( sendMessage.current.value);
+  const cleanMessage = (event) => {
+    event.preventDefault();
+    console.log(sendMessage.current.value);
     //const msg = sendMessage.current.value;
     // Socket.emit('chatMessage',msg); // emitting message using socket
 
@@ -90,26 +91,8 @@ function Room() {
           </div>
 
           <div className="chat-container">
-            <div className="chat-main">
-              <div className="chat-messages"></div>
-            </div>
-            <div className="chat-form-container">
-              <form id="chat-form">
-                <input
-                  type="text"
-                  // id="msg"
-                  placeholder="Enter the Message"
-                  autoComplete="off"
-                  required
-                  ref={sendMessage}
-                />
-                <button onClick={cleanMessage} type="button" className="btn-snd">
-                  <FontAwesome className="fa fa-send" />
-                </button>
-              </form>
-            </div>
+            <ChatBox />
           </div>
-        
         </div>
       </div>
     </div>
