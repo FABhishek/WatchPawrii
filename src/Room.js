@@ -9,7 +9,7 @@ import { Socket } from "socket.io-client";
 
 function Room() {
   const [vidLink, getVidLink] = useState("");
-  const [link, setLink] = useState("");
+  const [link, setLink] = useState("https://www.youtube.com/watch?v=-iun6KPT4SM");
 
   const setTheLink = (e) => {
     setLink(vidLink);
@@ -17,18 +17,18 @@ function Room() {
 
   const [playing, setPlaying] = useState(false);
 
-  const getLink = (event) => {
-    event.preventDefault();
+  const getLink = (e) => {
+    e.preventDefault();
   };
 
   // msg dissapper funtionality
   const sendMessage = useRef(null); // replacement of document.queryslecetor from vanilla.js
+  
   const cleanMessage = () => {
     console.log( sendMessage.current.value);
-    //const msg = sendMessage.current.value;
+    // const msg = sendMessage.current.value;
+    sendMessage.current.value = '';
     // Socket.emit('chatMessage',msg); // emitting message using socket
-
-    sendMessage.current.value = "";
     sendMessage.current.focus();
   };
 
@@ -109,7 +109,6 @@ function Room() {
               </form>
             </div>
           </div>
-        
         </div>
       </div>
     </div>
