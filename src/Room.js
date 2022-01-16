@@ -6,6 +6,7 @@ import "font-awesome/css/font-awesome.min.css";
 import FontAwesome from "react-fontawesome";
 import ReactPlayer from "react-player";
 import ChatBox from "./ChatBox";
+import IDS from "./Home.js"
 
 function Room() {
   const [vidLink, getVidLink] = useState("");

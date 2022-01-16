@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./Home.css";
 import Modal from "react-modal";
 import "./Home.css";
+import {v4 as uuid} from "uuid";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,6 +13,11 @@ const Home = () => {
   }
   const getRoomID = (event) => {
     event.preventDefault();
+  };
+
+  const IDS = {
+    unique_id = uuid(),
+    room_id = unique_id.slice(0,18)
   };
 
   return (
@@ -32,7 +38,9 @@ const Home = () => {
         </button>
 
         <button
-          onClick={(event) => (window.location.href = "/room")}
+          onClick={(event) =>
+            (window.location.href = "/room/id=" + room_id)
+          }
           type="button"
           className="bt Create"
         >
@@ -79,3 +87,4 @@ const Home = () => {
 };
 
 export default Home;
+export default IDS;
