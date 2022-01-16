@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import io from "socket.io-client";
 import { nanoid } from "nanoid";
-
+import "./Room.css"
 // no dotenv
 const socket = io.connect("http://localhost:5000");
-const userName = nanoid(4);
+const userName = nanoid(8);
 
 function App() {
   const [message, setMessage] = useState("");
@@ -39,6 +39,8 @@ function App() {
 
         <form onSubmit={sendChat}>
           <input
+            autocomplete="off"
+            autoFocus
             type="text"
             name="chat"
             placeholder="send text"

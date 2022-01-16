@@ -23,18 +23,11 @@ function Room() {
 
   // msg dissapper funtionality
   const sendMessage = useRef(null); // replacement of document.queryslecetor from vanilla.js
-<<<<<<< HEAD
   
-  const cleanMessage = () => {
-    console.log( sendMessage.current.value);
-    // const msg = sendMessage.current.value;
-    sendMessage.current.value = '';
-=======
   const cleanMessage = (event) => {
     event.preventDefault();
     console.log(sendMessage.current.value);
     //const msg = sendMessage.current.value;
->>>>>>> 54c80ef9f27e07f82ea820d7edbb8c9c44ba0151
     // Socket.emit('chatMessage',msg); // emitting message using socket
     sendMessage.current.focus();
   };
@@ -97,7 +90,7 @@ function Room() {
           </div>
 
           <div className="chat-container">
-            <ChatBox />
+            <ChatBox/>
           </div>
         </div>
       </div>
