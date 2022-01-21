@@ -14,11 +14,8 @@ const Home = () => {
   const getRoomID = (event) => {
     event.preventDefault();
   };
-
-  const IDS = {
-    unique_id = uuid(),
-    room_id = unique_id.slice(0,18)
-  };
+  
+  const room_id = uuid().slice(0,18);
 
   return (
     <div className="App">
@@ -63,6 +60,7 @@ const Home = () => {
           <h1 className="mtext">Enter Room Code</h1>
           <form className="formR" onSubmit={getRoomID}>
             <input
+              autoComplete="off"
               type="text"
               id="roomId"
               name="roomId"
@@ -87,4 +85,3 @@ const Home = () => {
 };
 
 export default Home;
-export default IDS;
