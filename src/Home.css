@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color: #282c34;
+  background-color:#242d41;
   min-height: 100vh;
   /* font-size: calc(10px + 2vmin); */
   color: white;
@@ -15,7 +15,7 @@
 }
 
 .NavColor {
-  background-color: #ffd700;
+  background-color: #4051b5;
   text-align: center;
 }
 
@@ -78,7 +78,7 @@
 }
 
 .bt:hover {
-  background-color: #ffd700;
+  background-color: #4051b5;
   color: #282c34;
   font-size: 20px;
   /* font-weight: bolder; */
@@ -100,7 +100,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #282c34;
+  background: #2e363e;
   padding: 1rem, 1.5rem;
   width: 24rem;
   border-radius: 0.5rem;

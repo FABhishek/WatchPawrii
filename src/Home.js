@@ -16,7 +16,7 @@ const Home = () => {
   const getRoomID = (event) => {
     event.preventDefault();
   };
-
+  
   const room_id = uuid().slice(0,18);
 
   return (
@@ -62,6 +62,7 @@ const Home = () => {
           <h1 className="mtext">Enter Room Code</h1>
           <form className="formR" onSubmit={getRoomID}>
             <input
+              autoComplete="off"
               type="text"
               id="roomId"
               name="roomId"
