@@ -4,6 +4,8 @@ import Modal from "react-modal";
 import "./Home.css";
 import {v4 as uuid} from "uuid";
 
+
+
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [roomId, setroomId] = useState("");
@@ -15,10 +17,7 @@ const Home = () => {
     event.preventDefault();
   };
 
-  const IDS = {
-    unique_id = uuid(),
-    room_id = unique_id.slice(0,18)
-  };
+  const room_id = uuid().slice(0,18);
 
   return (
     <div className="App">
@@ -39,7 +38,7 @@ const Home = () => {
 
         <button
           onClick={(event) =>
-            (window.location.href = "/room/id=" + room_id)
+            (window.location.href = "/room/" + room_id)
           }
           type="button"
           className="bt Create"
@@ -74,7 +73,7 @@ const Home = () => {
               type="submit"
               className="join-Button"
               onClick={(event) =>
-                (window.location.href = "/room/:Id=" + roomId)
+                (window.location.href = "/room/" + roomId)
               }
             >
               Join
@@ -87,4 +86,3 @@ const Home = () => {
 };
 
 export default Home;
-export default IDS;

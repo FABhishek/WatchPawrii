@@ -6,7 +6,6 @@ import "font-awesome/css/font-awesome.min.css";
 import FontAwesome from "react-fontawesome";
 import ReactPlayer from "react-player";
 import ChatBox from "./ChatBox";
-import IDS from "./Home.js"
 
 function Room() {
   const [vidLink, getVidLink] = useState("");
@@ -21,6 +20,9 @@ function Room() {
   const getLink = (event) => {
     event.preventDefault();
   };
+
+  const displayLink = window.location.href;
+  const newLink = displayLink.split('=')[1];
 
   // msg dissapper funtionality
   const sendMessage = useRef(null); // replacement of document.queryslecetor from vanilla.js
@@ -40,6 +42,7 @@ function Room() {
         <a className="textColor" href="/">
           <h1>WatchPawri!!!!</h1>
         </a>
+        <h2>{newLink}</h2>
         <a className="textColor" href="/">
           <FontAwesome className="fas fa-sign-out alt" name="sign out" />
           Exit
