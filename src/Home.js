@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./Home.css";
 import Modal from "react-modal";
 import "./Home.css";
-import {v4 as uuid} from "uuid";
+import { v4 as uuid } from "uuid";
 
 
 
@@ -16,8 +16,8 @@ const Home = () => {
   const getRoomID = (event) => {
     event.preventDefault();
   };
-  
-  const room_id = uuid().slice(0,18);
+
+  const room_id = uuid().slice(0, 18);
 
   return (
     <div className="App">
@@ -37,9 +37,7 @@ const Home = () => {
         </button>
 
         <button
-          onClick={(event) =>
-            (window.location.href = "/room/" + room_id)
-          }
+          onClick={(event) => (window.location.href = "/room")}
           type="button"
           className="bt Create"
         >
@@ -73,9 +71,7 @@ const Home = () => {
             <button
               type="submit"
               className="join-Button"
-              onClick={(event) =>
-                (window.location.href = "/room/" + roomId)
-              }
+              onClick={(event) => (window.location.href = "/join")}
             >
               Join
             </button>

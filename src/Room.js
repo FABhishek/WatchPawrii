@@ -5,17 +5,10 @@ import "./Home.css";
 import "font-awesome/css/font-awesome.min.css";
 import FontAwesome from "react-fontawesome";
 import ReactPlayer from "react-player";
-<<<<<<< HEAD
-import ChatBox from "./ChatBox";
-||||||| a66287d
-import ChatBox from "./ChatBox";
-import IDS from "./Home.js"
-=======
 import io from "socket.io-client";
 import Messages from "./messaging/messages.js";
 import MessageInput from "./messaging/messageinput.js";
 // import ChatBox from "./ChatBox";
->>>>>>> f6bd22745e715848f8c20412469eb655fb17d97d
 
 function Room() {
   const [vidLink, getVidLink] = useState("");
@@ -32,47 +25,8 @@ function Room() {
     getVidLink('');
   };
 
-<<<<<<< HEAD
-  const [playing, setPlaying] = useState(false);
-
-  const getLink = (event) => {
-    event.preventDefault();
-  };
-
-  const displayLink = window.location.href;
-  const newLink = displayLink.split('=')[1];
-
-  // msg dissapper funtionality
-  const sendMessage = useRef(null); // replacement of document.queryslecetor from vanilla.js
-  const cleanMessage = (event) => {
-    event.preventDefault();
-    console.log(sendMessage.current.value);
-    //const msg = sendMessage.current.value;
-    // Socket.emit('chatMessage',msg); // emitting message using socket
-
-    sendMessage.current.value = "";
-    sendMessage.current.focus();
-||||||| a66287d
-  const [playing, setPlaying] = useState(false);
-
-  const getLink = (event) => {
-    event.preventDefault();
-  };
-
-  // msg dissapper funtionality
-  const sendMessage = useRef(null); // replacement of document.queryslecetor from vanilla.js
-  const cleanMessage = (event) => {
-    event.preventDefault();
-    console.log(sendMessage.current.value);
-    //const msg = sendMessage.current.value;
-    // Socket.emit('chatMessage',msg); // emitting message using socket
-
-    sendMessage.current.value = "";
-    sendMessage.current.focus();
-=======
   const getLink = (e) => {
     e.preventDefault();
->>>>>>> f6bd22745e715848f8c20412469eb655fb17d97d
   };
 
   useEffect(() => {
@@ -90,12 +44,7 @@ function Room() {
         <a className="textColor" href="/">
           <h1>WatchPawri!!!!</h1>
         </a>
-<<<<<<< HEAD
-        <h2>{newLink}</h2>
-||||||| a66287d
-=======
         <h2> {newLink}</h2>
->>>>>>> f6bd22745e715848f8c20412469eb655fb17d97d
         <a className="textColor" href="/">
           <FontAwesome className="fas fa-sign-out alt" name="sign out" />
           Exit
@@ -138,6 +87,9 @@ function Room() {
                 onClick={() => setPlaying(true)}
               />
             )}
+          </button>
+          <button className="playBackSpeed" size="small" id="speedbtn" >
+              
           </button>
         </div>
         <div className="sidebar">
