@@ -3,7 +3,9 @@ import "./Home.css";
 import Modal from "react-modal";
 import "./Home.css";
 import { v4 as uuid } from "uuid";
-
+import axios from "axios";
+import { io } from "socket.io-client";
+import { useNavigate } from "react-router-dom";
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [roomId, setroomId] = useState("");
@@ -14,8 +16,32 @@ const Home = () => {
   const getRoomID = (event) => {
     event.preventDefault();
   };
+  const socket = io("http://localhost:8000");
 
-  const room_id = uuid().slice(0, 18);
+  socket.on("connect", () => {
+    console.log("Socket connected");
+  });
+
+  const navigate = useNavigate();
+  function joinRoom() {
+    axios
+      .get("http://localhost:5000/join", {
+        params: {
+          roomId: roomId,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        navigate("room=/" + `${res.data}`);
+      });
+  }
+
+  function createRoom(e) {
+    axios.get("http://localhost:5000/room").then((res) => {
+      console.log(res.data);
+      navigate("room=/" + `${res.data.room}`);
+    });
+  }
 
   return (
     <div className="App">
@@ -34,11 +60,7 @@ const Home = () => {
           Join room
         </button>
 
-        <button
-          onClick={(event) => (window.location.href = "/room")}
-          type="button"
-          className="bt Create"
-        >
+        <button onClick={createRoom} type="button" className="bt Create">
           Create Room
         </button>
       </div>
@@ -66,11 +88,7 @@ const Home = () => {
               className="inTput"
               onChange={(e) => setroomId(e.target.value)}
             />
-            <button
-              type="submit"
-              className="join-Button"
-              onClick={(event) => (window.location.href = "/join")}
-            >
+            <button type="submit" className="join-Button" onClick={joinRoom}>
               Join
             </button>
           </form>

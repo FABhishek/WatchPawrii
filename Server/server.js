@@ -1,10 +1,10 @@
 const express = require("express");
-const http = require("http");
+// const http = require("http");
 const socketio = require("socket.io");
 const { v4: uuidv4 } = require("uuid");
 const cors = require("cors");
 const app = express();
-const server = http.createServer(app);
+// const server = http.createServer(app);
 // const io = socketio(server);
 
 const PORT = process.env.PORT || 5000;
@@ -18,22 +18,25 @@ const botName = "weWatch Bot";
 
 app.use(express.urlencoded({ extended: true }));
 
-const io = require("socket.io")(server, {
+app.use(cors());
+const io = require("socket.io")(8000, {
   cors: {
     origin: "*",
   },
 });
 
-app.post("/room", (req, res) => {
+app.get("/room", (req, res) => {
   const room = createNewRoom();
-  res.redirect(`room=/${room}`);
+  res.send({ room });
 });
 
-app.post("/join", (req, res) => {
-  if (rooms[req.body.room]) {
-    res.redirect(`/${req.body.room}`);
+app.get("/join", (req, res) => {
+  console.log(req.query.roomId);
+
+  if (rooms[req.query.roomId]) {
+    res.send(`${req.query.roomId}`);
   } else {
-    res.redirect("/");
+    res.send("/");
   }
 });
 
@@ -44,6 +47,7 @@ app.post("/change_name", (req, res) => {
 function createNewRoom() {
   const roomID = uuidv4();
   rooms[roomID] = { currentVideo: null, users: {} };
+  console.log(rooms);
   return roomID;
 }
 // SOCKET stuff
@@ -175,6 +179,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });

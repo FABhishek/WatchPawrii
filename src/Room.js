@@ -5,39 +5,44 @@ import "./Home.css";
 import "font-awesome/css/font-awesome.min.css";
 import FontAwesome from "react-fontawesome";
 import ReactPlayer from "react-player";
-import io from "socket.io-client";
+// import io from "socket.io-client";
 import Messages from "./messaging/messages.js";
 import MessageInput from "./messaging/messageinput.js";
 // import ChatBox from "./ChatBox";
 
+import { io } from "socket.io-client";
+
 function Room() {
   const [vidLink, getVidLink] = useState("");
-  const [link, setLink] = useState(
-    "https://www.youtube.com/watch?v=-iun6KPT4SM");
+  const [link, setLink] = useState();
+  // "https://www.youtube.com/watch?v=-iun6KPT4SM");
   const [playing, setPlaying] = useState(false);
   const displayLink = window.location.href;
-  const newLink = displayLink.split("=")[1];
-  const [socket, setSocket] = useState(null);
+  const newLink = displayLink.split("=/")[1];
+  // const [socket, setSocket] = useState(null);
+
+  const socket = io("http://localhost:8000");
+  socket.on("connect", () => {
+    console.log("Socket connected");
+    socket.emit("joinRoom", { room });
+  });
 
   const setTheLink = (e) => {
     e.preventDefault();
     setLink(vidLink);
-    getVidLink('');
+    getVidLink("");
   };
 
   const getLink = (e) => {
     e.preventDefault();
   };
 
-  useEffect(() => {
-    const newSocket = io(`http://${window.location.hostname}:3000`);
-    setSocket(newSocket);
-    return () => newSocket.close();
-  }, [setSocket]);
-  
-  const preventReload = (e) =>{
+  const room = window.location.pathname.substring(7);
+  console.log(room);
+  const preventReload = (e) => {
     e.preventDefault();
-  }
+  };
+
   return (
     <div className="App">
       <nav className="navbar NavColor">
@@ -91,9 +96,15 @@ function Room() {
         </div>
         <div className="sidebar">
           <form className="chat-controls">
-            <button onClick = {preventReload} className="controls chat">Chat</button>
-            <button onClick = {preventReload} className="controls video">Audio</button>
-            <button onClick = {preventReload} className="controls users">Users</button>
+            <button onClick={preventReload} className="controls chat">
+              Chat
+            </button>
+            <button onClick={preventReload} className="controls video">
+              Audio
+            </button>
+            <button onClick={preventReload} className="controls users">
+              Users
+            </button>
           </form>
 
           <div className="Side-bar">

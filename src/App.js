@@ -9,8 +9,8 @@ function App() {
     <Router>
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route exact path="/room" element={<Room />} />
-        <Route path="/room" element={<Room />} />
+        <Route path="room=/:roomid" element={<Room />} />
+        <Route path="/join" element={<Room />} />
       </Routes>
     </Router>
   );
