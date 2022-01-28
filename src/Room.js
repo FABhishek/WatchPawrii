@@ -8,6 +8,7 @@ import ReactPlayer from "react-player";
 import io from "socket.io-client";
 import Messages from "./messaging/messages.js";
 import MessageInput from "./messaging/messageinput.js";
+import AudioChat from "./messaging/audio.js";
 // import ChatBox from "./ChatBox";
 
 function Room() {
@@ -38,6 +39,19 @@ function Room() {
   const preventReload = (e) =>{
     e.preventDefault();
   }
+  
+  const [sections, setSections] = useState('chat')
+
+  useEffect((e) => {
+
+    console.log("render")
+  }, [sections])
+
+
+
+
+  
+
   return (
     <div className="App">
       <nav className="navbar NavColor">
@@ -88,18 +102,15 @@ function Room() {
               />
             )}
           </button>
-          <button className="playBackSpeed" size="small" id="speedbtn" >
-              
-          </button>
         </div>
         <div className="sidebar">
-          <form className="chat-controls">
-            <button onClick = {preventReload} className="controls chat">Chat</button>
-            <button onClick = {preventReload} className="controls video">Audio</button>
-            <button onClick = {preventReload} className="controls users">Users</button>
-          </form>
-
-          <div className="Side-bar">
+          <div className="chat-controls">
+            <button onClick = {() => setSections('chat')} className="controls chat">Chat</button>
+            <button onClick = {() => setSections('audio')} className="controls audio">Audio</button>
+            <button onClick = {() => setSections('users')} className="controls users">Users</button>
+          </div>
+          <h1>{sections}</h1>
+          <div onClick = { () => setChat()}className="Side-bar">
             {socket ? (
               <div className="chat-container">
                 <Messages socket={socket} />
@@ -108,6 +119,9 @@ function Room() {
             ) : (
               <div>Connecting....</div>
             )}
+          </div>
+          <div onClick = { () => setAudio}className="side-bar-audio">
+              <AudioChat/>
           </div>
         </div>
       </div>
