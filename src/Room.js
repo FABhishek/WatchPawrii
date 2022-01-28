@@ -20,11 +20,16 @@ function Room() {
   const displayLink = window.location.href;
   const newLink = displayLink.split("=/")[1];
   // const [socket, setSocket] = useState(null);
-
+  const room = window.location.pathname.substring(7);
+  console.log(room);
   const socket = io("http://localhost:8000");
   socket.on("connect", () => {
     console.log("Socket connected");
+
     socket.emit("joinRoom", { room });
+    socket.on("SYNC", (data) => {
+      setLink = data;
+    });
   });
 
   const setTheLink = (e) => {
@@ -37,8 +42,6 @@ function Room() {
     e.preventDefault();
   };
 
-  const room = window.location.pathname.substring(7);
-  console.log(room);
   const preventReload = (e) => {
     e.preventDefault();
   };

@@ -16,11 +16,11 @@ const Home = () => {
   const getRoomID = (event) => {
     event.preventDefault();
   };
-  const socket = io("http://localhost:8000");
+  // const socket = io("http://localhost:8000");
 
-  socket.on("connect", () => {
-    console.log("Socket connected");
-  });
+  // socket.on("connect", () => {
+  //   console.log("Socket connected");
+  // });
 
   const navigate = useNavigate();
   function joinRoom() {
