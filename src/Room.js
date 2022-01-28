@@ -5,38 +5,45 @@ import "./Home.css";
 import "font-awesome/css/font-awesome.min.css";
 import FontAwesome from "react-fontawesome";
 import ReactPlayer from "react-player";
-import io from "socket.io-client";
+// import io from "socket.io-client";
 import Messages from "./messaging/messages.js";
 import MessageInput from "./messaging/messageinput.js";
 import AudioChat from "./messaging/audio.js";
 // import ChatBox from "./ChatBox";
 
+import { io } from "socket.io-client";
+
 function Room() {
   const [vidLink, getVidLink] = useState("");
-  const [link, setLink] = useState(
-    "https://www.youtube.com/watch?v=-iun6KPT4SM");
+  const [link, setLink] = useState();
+  // "https://www.youtube.com/watch?v=-iun6KPT4SM");
   const [playing, setPlaying] = useState(false);
   const displayLink = window.location.href;
-  const newLink = displayLink.split("=")[1];
-  const [socket, setSocket] = useState(null);
+  const newLink = displayLink.split("=/")[1];
+  // const [socket, setSocket] = useState(null);
+  const room = window.location.pathname.substring(7);
+  console.log(room);
+  const socket = io("http://localhost:8000");
+  socket.on("connect", () => {
+    console.log("Socket connected");
+
+    socket.emit("joinRoom", { room });
+    socket.on("SYNC", (data) => {
+      setLink = data;
+    });
+  });
 
   const setTheLink = (e) => {
     e.preventDefault();
     setLink(vidLink);
-    getVidLink('');
+    getVidLink("");
   };
 
   const getLink = (e) => {
     e.preventDefault();
   };
 
-  useEffect(() => {
-    const newSocket = io(`http://${window.location.hostname}:3000`);
-    setSocket(newSocket);
-    return () => newSocket.close();
-  }, [setSocket]);
-  
-  const preventReload = (e) =>{
+  const preventReload = (e) => {
     e.preventDefault();
   }
   
@@ -51,6 +58,8 @@ function Room() {
 
 
   
+
+  };
 
   return (
     <div className="App">
@@ -111,6 +120,19 @@ function Room() {
           </div>
           <h1>{sections}</h1>
           <div onClick = { () => setChat()}className="Side-bar">
+          <form className="chat-controls">
+            <button onClick={preventReload} className="controls chat">
+              Chat
+            </button>
+            <button onClick={preventReload} className="controls video">
+              Audio
+            </button>
+            <button onClick={preventReload} className="controls users">
+              Users
+            </button>
+          </form>
+
+          <div className="Side-bar">
             {socket ? (
               <div className="chat-container">
                 <Messages socket={socket} />

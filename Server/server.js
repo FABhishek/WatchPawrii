@@ -1,10 +1,10 @@
 const express = require("express");
-const http = require("http");
+// const http = require("http");
 const socketio = require("socket.io");
 const { v4: uuidv4 } = require("uuid");
 const cors = require("cors");
 const app = express();
-const server = http.createServer(app);
+// const server = http.createServer(app);
 // const io = socketio(server);
 
 const PORT = process.env.PORT || 5000;
@@ -18,22 +18,25 @@ const botName = "weWatch Bot";
 
 app.use(express.urlencoded({ extended: true }));
 
-const io = require("socket.io")(server, {
+app.use(cors());
+const io = require("socket.io")(8000, {
   cors: {
     origin: "*",
   },
 });
 
-app.post("/room", (req, res) => {
+app.get("/room", (req, res) => {
   const room = createNewRoom();
-  res.redirect(`room=/${room}`);
+  res.send({ room });
 });
 
-app.post("/join", (req, res) => {
-  if (rooms[req.body.room]) {
-    res.redirect(`/${req.body.room}`);
+app.get("/join", (req, res) => {
+  console.log("34", req.query.roomId);
+
+  if (rooms[req.query.roomId]) {
+    res.send(`${req.query.roomId}`);
   } else {
-    res.redirect("/");
+    res.send("/");
   }
 });
 
@@ -44,6 +47,7 @@ app.post("/change_name", (req, res) => {
 function createNewRoom() {
   const roomID = uuidv4();
   rooms[roomID] = { currentVideo: null, users: {} };
+  console.log("50:", rooms);
   return roomID;
 }
 // SOCKET stuff
@@ -55,25 +59,25 @@ io.on("connection", (socket) => {
 
     socket.join(room);
 
-    socket.emit("currentUser", user);
+    // socket.emit("currentUser", user);
     // CHAT EVENTS
 
     // Welcome current user
-    socket.emit("message", formatMessage(botName, "Welcome to weWatch!"));
+    // socket.emit("message", formatMessage(botName, "Welcome to weWatch!"));
 
     // Broadcasts message when a user connects
-    socket.broadcast
-      .to(room)
-      .emit("message", formatMessage(botName, `${user} has joined the room`));
+    // socket.broadcast
+    //   .to(room)
+    //   .emit("message", formatMessage(botName, `${user} has joined the room`));
 
     // Send users list to room
-    io.to(room).emit("roomUsers", { users });
+    // io.to(room).emit("roomUsers", { users });
 
-    console.log("rooms:", rooms);
+    console.log("line 76 rooms:", rooms);
 
-    socket.on("chatMessage", (msg) => {
-      io.to(room).emit("message", formatMessage(user, msg));
-    });
+    // socket.on("chatMessage", (msg) => {
+    //   io.to(room).emit("message", formatMessage(user, msg));
+    // });
 
     // VIDEO EVENTS
 
@@ -84,11 +88,12 @@ io.on("connection", (socket) => {
         state: rooms[room].currentVideo.state,
         currTime: rooms[room].currentVideo.currTime,
       };
+      console.log(videoData);
       socket.emit("SYNC", videoData);
     }
 
     socket.on("VIDEO_LOAD", (data) => {
-      console.log(data);
+      console.log("vid load", data);
       rooms[room].currentVideo = new Video(data.videoId);
 
       socket.broadcast
@@ -131,30 +136,30 @@ io.on("connection", (socket) => {
     });
 
     // WEBRTC EVENTS
-    socket.on("offer", (offer) => {
-      console.log("Offer received from client");
-      socket.to(room).emit("offer", offer);
-    });
+    // socket.on("offer", (offer) => {
+    //   console.log("Offer received from client");
+    //   socket.to(room).emit("offer", offer);
+    // });
 
-    socket.on("answer", (answer) => {
-      console.log("Answer received from client");
-      socket.to(room).emit("answer", answer);
-    });
+    // socket.on("answer", (answer) => {
+    //   console.log("Answer received from client");
+    //   socket.to(room).emit("answer", answer);
+    // });
 
-    socket.on("ice-candidate", (candidate) => {
-      console.log("Candidate received from client");
-      socket.to(room).emit("ice-candidate", candidate);
-    });
+    // socket.on("ice-candidate", (candidate) => {
+    //   console.log("Candidate received from client");
+    //   socket.to(room).emit("ice-candidate", candidate);
+    // });
 
-    socket.on("start-call", (data) => {
-      console.log("starting call");
-      io.to(room).emit("start-call", data);
-    });
+    // socket.on("start-call", (data) => {
+    //   console.log("starting call");
+    //   io.to(room).emit("start-call", data);
+    // });
 
-    socket.on("hang-up", (data) => {
-      console.log("hanging up all clients");
-      io.to(room).emit("hang-up", data);
-    });
+    // socket.on("hang-up", (data) => {
+    //   console.log("hanging up all clients");
+    //   io.to(room).emit("hang-up", data);
+    // });
 
     // User disconnects
     socket.on("disconnect", () => {
@@ -170,11 +175,11 @@ io.on("connection", (socket) => {
 
       // Delete room if there are no users
       // if (Object.keys(rooms[room].users).length === 0) delete rooms[room];
-      console.log("rooms", rooms);
+      console.log("177rooms", rooms);
     });
   });
 });
 
-server.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
