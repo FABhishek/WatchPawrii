@@ -14,33 +14,43 @@ import { io } from "socket.io-client";
 
 function Room() {
   const [vidLink, getVidLink] = useState("");
-  const [link, setLink] = useState();
+  const [Link, setLink] = useState();
   // "https://www.youtube.com/watch?v=-iun6KPT4SM");
   const [playing, setPlaying] = useState(false);
   const displayLink = window.location.href;
   const newLink = displayLink.split("=/")[1];
   // const [socket, setSocket] = useState(null);
   const room = window.location.pathname.substring(7);
-  console.log(room);
+  // console.log("rooms24 :", room);
   const socket = io("http://localhost:8000");
-  socket.on("connect", () => {
+  useEffect(() => {
     console.log("Socket connected");
 
     socket.emit("joinRoom", { room });
-    socket.on("SYNC", (data) => {
-      setLink = data;
-    });
-  });
+  }, []);
 
+  socket.on("VIDEO_LOAD", (data) => {
+    console.log(" 35 vid load", data);
+    setLink(data.videoId);
+  });
+  socket.on("SYNC", (data) => {
+    console.log("sync 43", data);
+    setLink(data.videoId);
+  });
   const setTheLink = (e) => {
     e.preventDefault();
-    setLink(vidLink);
-    getVidLink("");
+    console.log("vidLink:", vidLink);
+    socket.emit("joinRoom", { room });
+    socket.emit("VIDEO_LOAD", { videoId: vidLink });
+
+    // getVidLink("");
   };
 
-  const getLink = (e) => {
-    e.preventDefault();
-  };
+  // const getLink = (e) => {
+  //   e.preventDefault();
+  //   const id = getYouTubeId(vidLink);
+  //   socket.emit("VIDEO_LOAD", { event: "load", videoId: id });
+  // };
 
   const preventReload = (e) => {
     e.preventDefault();
@@ -60,7 +70,10 @@ function Room() {
       </nav>
       <div className="content">
         <div className="video-container">
-          <form onSubmit={getLink} className="search-form">
+          <form
+            // onSubmit={getLink}
+            className="search-form"
+          >
             <input
               autoFocus
               type="text"
@@ -68,13 +81,13 @@ function Room() {
               onChange={(e) => getVidLink(e.target.value)}
               placeholder="Enter any valid URL ..."
             />
-            <button className="ldbtn" onClick={setTheLink}>
+            <button className="ldbtn" type="submit" onClick={setTheLink}>
               Load
             </button>
           </form>
           <div id="player">
             <ReactPlayer
-              url={link}
+              url={Link}
               width="100%"
               height="100%"
               controls={false}
@@ -111,14 +124,14 @@ function Room() {
           </form>
 
           <div className="Side-bar">
-            {socket ? (
+            {/* {socket ? (
               <div className="chat-container">
                 <Messages socket={socket} />
                 <MessageInput socket={socket} />
               </div>
             ) : (
               <div>Connecting....</div>
-            )}
+            )} */}
           </div>
         </div>
       </div>

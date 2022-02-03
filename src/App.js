@@ -10,6 +10,8 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="room=/:roomid" element={<Room />} />
+        <Route path="/room" element={<Room />} />
+
         <Route path="/join" element={<Room />} />
       </Routes>
     </Router>
