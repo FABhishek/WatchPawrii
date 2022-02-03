@@ -47,19 +47,30 @@ function Room() {
     e.preventDefault();
   }
   
-  const [sections, setSections] = useState('chat')
+  // side-bar functions
 
-  useEffect((e) => {
+  const [chatVisible, setChatVisible] = useState(true);
+  const [audioVisible, setAudioVisible] = useState(false);
+  const [userVisible, setUserVisible] = useState(false);
 
-    console.log("render")
-  }, [sections])
+  function makeChatVisible() {
+    setChatVisible(true);
+    setAudioVisible(false);
+    setUserVisible(false);
+  }
 
+  function makeAudioVisible() {
+    setChatVisible(false);
+    setAudioVisible(true);
+    setUserVisible(false);
+  }
 
+  function makeUserVisible() {
+    setChatVisible(false);
+    setAudioVisible(false);
+    setUserVisible(true);
+  }
 
-
-  
-
-  };
 
   return (
     <div className="App">
@@ -67,7 +78,7 @@ function Room() {
         <a className="textColor" href="/">
           <h1>WatchPawri!!!!</h1>
         </a>
-        <h2> {newLink}</h2>
+        <h2> {room}</h2>
         <a className="textColor" href="/">
           <FontAwesome className="fas fa-sign-out alt" name="sign out" />
           Exit
@@ -114,25 +125,18 @@ function Room() {
         </div>
         <div className="sidebar">
           <div className="chat-controls">
-            <button onClick = {() => setSections('chat')} className="controls chat">Chat</button>
-            <button onClick = {() => setSections('audio')} className="controls audio">Audio</button>
-            <button onClick = {() => setSections('users')} className="controls users">Users</button>
-          </div>
-          <h1>{sections}</h1>
-          <div onClick = { () => setChat()}className="Side-bar">
-          <form className="chat-controls">
-            <button onClick={preventReload} className="controls chat">
+            <button onClick={makeChatVisible} className="controls chat">
               Chat
             </button>
-            <button onClick={preventReload} className="controls video">
+            <button onClick={makeAudioVisible} className="controls video">
               Audio
             </button>
-            <button onClick={preventReload} className="controls users">
+            <button onClick={makeUserVisible} className="controls users">
               Users
             </button>
-          </form>
+          </div>
 
-          <div className="Side-bar">
+          {chatVisible && <div className="Side-bar">
             {socket ? (
               <div className="chat-container">
                 <Messages socket={socket} />
@@ -141,10 +145,10 @@ function Room() {
             ) : (
               <div>Connecting....</div>
             )}
-          </div>
-          <div onClick = { () => setAudio}className="side-bar-audio">
+          </div>}
+          {audioVisible && <div className="side-bar-audio">
               <AudioChat/>
-          </div>
+          </div>}
         </div>
       </div>
     </div>
