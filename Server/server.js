@@ -47,7 +47,7 @@ app.post("/change_name", (req, res) => {
 function createNewRoom() {
   const roomID = uuidv4();
   rooms[roomID] = { currentVideo: null, users: {} };
-  console.log("50:", rooms);
+  // console.log("50:", rooms);
   return roomID;
 }
 // SOCKET stuff
@@ -88,17 +88,17 @@ io.on("connection", (socket) => {
         state: rooms[room].currentVideo.state,
         currTime: rooms[room].currentVideo.currTime,
       };
-      console.log(videoData);
+      console.log(" 91 video data", videoData);
       socket.emit("SYNC", videoData);
     }
 
     socket.on("VIDEO_LOAD", (data) => {
       console.log("vid load", data);
       rooms[room].currentVideo = new Video(data.videoId);
-
-      socket.broadcast
-        .to(room)
-        .emit("message", formatMessage(botName, `${user} loaded a video`));
+      console.log("line 98 rooms:", rooms[room]);
+      // socket.broadcast
+      //   .to(room)
+      //   .emit("message", formatMessage(botName, `${user} loaded a video`));
       io.to(room).emit("VIDEO_LOAD", rooms[room].currentVideo.videoId);
     });
 
@@ -175,7 +175,6 @@ io.on("connection", (socket) => {
 
       // Delete room if there are no users
       // if (Object.keys(rooms[room].users).length === 0) delete rooms[room];
-      console.log("177rooms", rooms);
     });
   });
 });
