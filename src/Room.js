@@ -22,25 +22,25 @@ function Room() {
   // const [socket, setSocket] = useState(null);
   const room = window.location.pathname.substring(7);
   // console.log("rooms24 :", room);
+  // const ENDPOINT = "http://localhost:8000";
+  // const socket = io(ENDPOINT, () => {
+  //   console.log("connected to socket");
+  // });
   const socket = io("http://localhost:8000");
   useEffect(() => {
-    console.log("Socket connected");
-
     socket.emit("joinRoom", { room });
-  }, []);
+  });
 
   socket.on("VIDEO_LOAD", (data) => {
     console.log(" 35 vid load", data);
     setLink(data.videoId);
   });
-  socket.on("SYNC", (data) => {
-    console.log("sync 43", data);
-    setLink(data.videoId);
-  });
+
   const setTheLink = (e) => {
     e.preventDefault();
     console.log("vidLink:", vidLink);
-    socket.emit("joinRoom", { room });
+    // setLink(vidLink);
+    // socket.emit("joinRoom", { room });
     socket.emit("VIDEO_LOAD", { videoId: vidLink });
 
     // getVidLink("");

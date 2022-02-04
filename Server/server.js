@@ -85,8 +85,8 @@ io.on("connection", (socket) => {
     if (rooms[room].currentVideo) {
       const videoData = {
         videoId: rooms[room].currentVideo.videoId,
-        state: rooms[room].currentVideo.state,
-        currTime: rooms[room].currentVideo.currTime,
+        // state: rooms[room].currentVideo.state,
+        // currTime: rooms[room].currentVideo.currTime,
       };
       console.log(" 91 video data", videoData);
       socket.emit("SYNC", videoData);
