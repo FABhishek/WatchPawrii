@@ -55,11 +55,11 @@ function Room() {
 
     socket.emit("VIDEO_PAUSE", {
       event: "pause",
-      currTime: ReactPlayer.getCurrentTime() || 0,
+      currTime: ReactPlayer.getCurrentTime() || 20,
     });
   };
   const handlePlay = () => {
-    console.log("playing:", ReactPlayer.getCurrentTime() || 10);
+    console.log("playing:", ReactPlayer.getCurrentTime() || 30);
     socket.emit("VIDEO_PLAY", {
       event: "play",
       currTime: ReactPlayer.getCurrentTime() || 0,
@@ -105,18 +105,7 @@ function Room() {
               height="100%"
               onPause={handlePause}
               onPlay={handlePlay}
-              // onPause={() =>
-              //   socket.emit("VIDEO_PAUSE", {
-              //     event: "pause",
-              //     currTime: ReactPlayer.getCurrentTime(),
-              //   })
-              // }
-              // onPlay={() =>
-              //   socket.emit("VIDEO_PLAY", {
-              //     event: "play",
-              //     currTime: ReactPlayer.getCurrentTime(),
-              //   })
-              // }
+              muted={true}
               playing={true}
             />
           </div>
