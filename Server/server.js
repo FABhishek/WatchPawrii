@@ -73,7 +73,7 @@ io.on("connection", (socket) => {
     // Send users list to room
     // io.to(room).emit("roomUsers", { users });
 
-    console.log("line 76 rooms:", rooms);
+    // console.log("line 76 rooms:", rooms);
 
     // socket.on("chatMessage", (msg) => {
     //   io.to(room).emit("message", formatMessage(user, msg));
@@ -103,24 +103,24 @@ io.on("connection", (socket) => {
     });
 
     socket.on("VIDEO_PLAY", (data) => {
-      console.log(data);
+      console.log("video play :", data);
       rooms[room].currentVideo.play();
 
-      socket.broadcast
-        .to(room)
-        .emit("message", formatMessage(botName, `${user} played the video`));
+      // socket.broadcast
+      //   .to(room)
+      //   .emit("message", formatMessage(botName, `${user} played the video`));
       socket
         .to(room)
         .broadcast.emit("VIDEO_PLAY", rooms[room].currentVideo.state);
     });
 
     socket.on("VIDEO_PAUSE", (data) => {
-      console.log(data);
+      console.log("video pause", data);
       rooms[room].currentVideo.pause(data.currTime);
 
-      socket.broadcast
-        .to(room)
-        .emit("message", formatMessage(botName, `${user} paused the video`));
+      // socket.broadcast
+      //   .to(room)
+      //   .emit("message", formatMessage(botName, `${user} paused the video`));
       socket
         .to(room)
         .broadcast.emit("VIDEO_PAUSE", rooms[room].currentVideo.state);

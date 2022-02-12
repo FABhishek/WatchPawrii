@@ -18,22 +18,47 @@ function Room() {
   const [link, setLink] = useState("https://www.youtube.com/watch?v=-iun6KPT4SM");
   const playing = false;
   let [playbackSpeed, setPlaybackSpeed] = useState(1);
+  const [Link, setLink] = useState("");
+  // "https://www.youtube.com/watch?v=-iun6KPT4SM");
+  const [playing, setPlaying] = useState(true);
+  const displayLink = window.location.href;
+  const newLink = displayLink.split("=/")[1];
   const room = window.location.pathname.substring(7);
   // console.log(room);
 
   // console.log("rooms24 :", room);
+
   const socket = io("http://localhost:8000");
   useEffect(() => {
     console.log("Socket connected");
   }, []);
+    socket.emit("joinRoom", { room });
+  };
 
   
+  socket.on("SYNC", (data) => {
+    console.log("sync 43", data);
+    setLink(data.videoId);
+  });
+  socket.on("VIDEO_LOAD", (data) => {
+    console.log(" 35 vid load", data);
+    setLink(data.videoId);
+  });
+
+  socket.on("VIDEO_PAUSE", (data) => {
+    // ReactPlayer.seekTo(data.currTime);
+    console.log("vid pause", data);
+    ReactPlayer.pause().seekTo(data.currTime);
+  });
+  socket.on("VIDEO_PLAY", (data) => {
+    console.log("vid play", data);
+    ReactPlayer.play();
+  });
   const setTheLink = (e) => {
     // e.preventDefault();
     socket.emit("joinRoom", { room });
 
     console.log("vidLink:", vidLink);
-    socket.emit("joinRoom", { room });
     socket.emit("VIDEO_LOAD", { videoId: vidLink });
 
     socket.on("SYNC", (data) => {
@@ -51,11 +76,8 @@ function Room() {
     getVidLink("");
   };
 
-  // const getLink = (e) => {
-  //   e.preventDefault();
-  //   const id = getYouTubeId(vidLink);
-  //   socket.emit("VIDEO_LOAD", { event: "load", videoId: id });
-  // };
+  const handlePause = () => {
+    console.log("Pause:", ReactPlayer.getCurrentTime() || 10);
 
   const setSpeed = () => 
   {
@@ -68,6 +90,18 @@ function Room() {
 
   // const room = window.location.pathname.substring(7);
   // console.log(room);
+    socket.emit("VIDEO_PAUSE", {
+      event: "pause",
+      currTime: ReactPlayer.getCurrentTime() || 20,
+    });
+  };
+  const handlePlay = () => {
+    console.log("playing:", ReactPlayer.getCurrentTime() || 30);
+    socket.emit("VIDEO_PLAY", {
+      event: "play",
+      currTime: ReactPlayer.getCurrentTime() || 0,
+    });
+  };
   const preventReload = (e) => {
     e.preventDefault();
   };
@@ -132,12 +166,32 @@ function Room() {
               controls={true}
               playing={playing}
               playbackRate={playbackSpeed}
+              onPause={handlePause}
+              onPlay={handlePlay}
+              muted={true}
+              playing={true}
             />
           <button className = "speedControl" onClick={setSpeed}>🚀
           </button>
           <b className="speedDisplay">{playbackSpeed}x</b> 
           </div>
-        </div>
+          {/* </div> */}
+          {/* <button className="play-pause" size="small" id="playbtn">
+            {playing ? (
+              <FontAwesome
+                className="fa-solid fa-circle-play"
+                name="play"
+                onClick={() => setPlaying(false)}
+              />
+            ) : (
+              <FontAwesome
+                className="fa-solid fa-circle-pause"
+                name="pause"
+                onClick={() => setPlaying(true)}
+              />
+            )}
+          </button> */}
+        {/* </div> */}
         <div className="sidebar">
           <div className="chat-controls">
             <button onClick={makeChatVisible} className="controls chat">
@@ -167,8 +221,9 @@ function Room() {
         </div>
       </div>
     </div>
+    </div>
   );
-}
+};
 
 export default Room;
 

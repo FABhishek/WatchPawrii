@@ -41,7 +41,7 @@ const Home = () => {
 
   function createRoom(e) {
     axios.get("http://localhost:5000/room").then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       navigate("room=/" + `${res.data.room}`);
     });
   }
