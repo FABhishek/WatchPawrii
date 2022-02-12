@@ -9,42 +9,46 @@ import ReactPlayer from "react-player";
 import Messages from "./messaging/messages.js";
 import MessageInput from "./messaging/messageinput.js";
 import AudioChat from "./messaging/audio.js";
-// import ChatBox from "./ChatBox";
 
-import { io } from "socket.io-client";
+import  io from "socket.io-client";
 
 function Room() {
+
   const [vidLink, getVidLink] = useState("");
-  const [Link, setLink] = useState();
-  // "https://www.youtube.com/watch?v=-iun6KPT4SM");
-  const [playing, setPlaying] = useState(false);
-  const displayLink = window.location.href;
-  const newLink = displayLink.split("=/")[1];
-  // const [socket, setSocket] = useState(null);
+  const [link, setLink] = useState("https://www.youtube.com/watch?v=-iun6KPT4SM");
+  const playing = false;
+  let [playbackSpeed, setPlaybackSpeed] = useState(1);
   const room = window.location.pathname.substring(7);
+  // console.log(room);
+
   // console.log("rooms24 :", room);
   const socket = io("http://localhost:8000");
   useEffect(() => {
     console.log("Socket connected");
-
-    socket.emit("joinRoom", { room });
   }, []);
 
-  socket.on("VIDEO_LOAD", (data) => {
-    console.log(" 35 vid load", data);
-    setLink(data.videoId);
-  });
-  socket.on("SYNC", (data) => {
-    console.log("sync 43", data);
-    setLink(data.videoId);
-  });
+  
   const setTheLink = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
+    socket.emit("joinRoom", { room });
+
     console.log("vidLink:", vidLink);
     socket.emit("joinRoom", { room });
     socket.emit("VIDEO_LOAD", { videoId: vidLink });
 
-    // getVidLink("");
+    socket.on("SYNC", (data) => {
+      console.log("sync 43", data);
+      setLink(data);
+      alert(data.videoId);
+    });
+
+    socket.on("VIDEO_LOAD", (data) => {
+      console.log(" 35 vid load", data);
+      setLink(data);
+      alert(data);
+    });
+   
+    getVidLink("");
   };
 
   // const getLink = (e) => {
@@ -53,10 +57,21 @@ function Room() {
   //   socket.emit("VIDEO_LOAD", { event: "load", videoId: id });
   // };
 
+  const setSpeed = () => 
+  {
+    playbackSpeed += 0.25;
+    playbackSpeed <= 2 ?
+    setPlaybackSpeed(playbackSpeed):
+    setPlaybackSpeed(playbackSpeed = 1)
+  }
+
+
+  // const room = window.location.pathname.substring(7);
+  // console.log(room);
   const preventReload = (e) => {
     e.preventDefault();
-  }
-  
+  };
+
   // side-bar functions
 
   const [chatVisible, setChatVisible] = useState(true);
@@ -81,7 +96,6 @@ function Room() {
     setUserVisible(true);
   }
 
-
   return (
     <div className="App">
       <nav className="navbar NavColor">
@@ -91,7 +105,6 @@ function Room() {
         <h2> {room}</h2>
         <a className="textColor" href="/">
           <FontAwesome className="fas fa-sign-out alt" name="sign out" />
-          Exit
         </a>
       </nav>
       <div className="content">
@@ -113,28 +126,17 @@ function Room() {
           </form>
           <div id="player">
             <ReactPlayer
-              url={Link}
+              url={link}
               width="100%"
               height="100%"
-              controls={false}
+              controls={true}
               playing={playing}
+              playbackRate={playbackSpeed}
             />
-          </div>
-          <button className="play-pause" size="small" id="playbtn">
-            {playing ? (
-              <FontAwesome
-                className="fa-solid fa-circle-play"
-                name="play"
-                onClick={() => setPlaying(false)}
-              />
-            ) : (
-              <FontAwesome
-                className="fa-solid fa-circle-pause"
-                name="pause"
-                onClick={() => setPlaying(true)}
-              />
-            )}
+          <button className = "speedControl" onClick={setSpeed}>🚀
           </button>
+          <b className="speedDisplay">{playbackSpeed}x</b> 
+          </div>
         </div>
         <div className="sidebar">
           <div className="chat-controls">
@@ -169,3 +171,5 @@ function Room() {
 }
 
 export default Room;
+
+
