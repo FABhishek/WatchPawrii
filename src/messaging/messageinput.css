@@ -7,9 +7,9 @@ input {
   padding: 20px;
   max-width: 435px;
   width: 100%;
-  position:absolute;
-  bottom: -50px;
+  bottom: 0px;
   right: 0px;
+  display: block;
   /* display: flex; */
 }
 /* 

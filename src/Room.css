@@ -76,6 +76,7 @@
 .sidebar {
   flex: 1.3;
   border-left: 2px solid black;
+  height: 750px;
 }
 
 .chat-controls {
