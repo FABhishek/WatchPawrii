@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./Room.css";
 import "./Home.css";
 import "font-awesome/css/font-awesome.min.css";
@@ -15,8 +15,8 @@ import { io } from "socket.io-client";
 function Room() {
   const [vidLink, getVidLink] = useState("");
   const [Link, setLink] = useState("");
-  // "https://www.youtube.com/watch?v=-iun6KPT4SM");
-  const [playing, setPlaying] = useState(true);
+  const player = useRef(null);
+  const [playing, setPlaying] = useState(false);
   const displayLink = window.location.href;
   const newLink = displayLink.split("=/")[1];
   const room = window.location.pathname.substring(7);
@@ -36,33 +36,33 @@ function Room() {
   });
 
   socket.on("VIDEO_PAUSE", (data) => {
-    // ReactPlayer.seekTo(data.currTime);
     console.log("vid pause", data);
-    ReactPlayer.pause().seekTo(data.currTime);
+    player.current.seekTo(data.currTime);
   });
   socket.on("VIDEO_PLAY", (data) => {
     console.log("vid play", data);
-    ReactPlayer.play();
+    setPlaying(true);
+    // player.current.play(data.currTime);
   });
+
+  const handlePause = () => {
+    console.log("Pause:");
+    socket.emit("VIDEO_PAUSE", {
+      event: "pause",
+      currTime: player.current.getCurrentTime(),
+    });
+  };
   const setTheLink = (e) => {
     e.preventDefault();
     console.log("vidLink:", vidLink);
     socket.emit("VIDEO_LOAD", { videoId: vidLink });
   };
 
-  const handlePause = () => {
-    console.log("Pause:", ReactPlayer.getCurrentTime() || 10);
-
-    socket.emit("VIDEO_PAUSE", {
-      event: "pause",
-      currTime: ReactPlayer.getCurrentTime() || 20,
-    });
-  };
   const handlePlay = () => {
-    console.log("playing:", ReactPlayer.getCurrentTime() || 30);
+    console.log("playing:");
     socket.emit("VIDEO_PLAY", {
       event: "play",
-      currTime: ReactPlayer.getCurrentTime() || 0,
+      currTime: player.current.getCurrentTime(),
     });
   };
   const preventReload = (e) => {
@@ -101,12 +101,14 @@ function Room() {
           <div id="player">
             <ReactPlayer
               url={Link}
+              ref={player}
               width="100%"
               height="100%"
               onPause={handlePause}
               onPlay={handlePlay}
               muted={true}
-              playing={true}
+              controls={true}
+              playing={playing}
             />
           </div>
           {/* <button className="play-pause" size="small" id="playbtn">

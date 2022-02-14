@@ -96,34 +96,20 @@ io.on("connection", (socket) => {
       console.log("vid load", data);
       rooms[room].currentVideo = new Video(data.videoId);
       console.log("line 98 rooms:", rooms[room]);
-      // socket.broadcast
-      //   .to(room)
-      //   .emit("message", formatMessage(botName, `${user} loaded a video`));
       io.to(room).emit("VIDEO_LOAD", rooms[room].currentVideo.videoId);
     });
 
     socket.on("VIDEO_PLAY", (data) => {
       console.log("video play :", data);
-      rooms[room].currentVideo.play();
-
-      // socket.broadcast
-      //   .to(room)
-      //   .emit("message", formatMessage(botName, `${user} played the video`));
-      socket
-        .to(room)
-        .broadcast.emit("VIDEO_PLAY", rooms[room].currentVideo.state);
+      // rooms[room].currentVideo.play();
+      io.to(room).emit("VIDEO_PLAY", rooms[room].currentVideo);
     });
 
     socket.on("VIDEO_PAUSE", (data) => {
       console.log("video pause", data);
-      rooms[room].currentVideo.pause(data.currTime);
 
-      // socket.broadcast
-      //   .to(room)
-      //   .emit("message", formatMessage(botName, `${user} paused the video`));
-      socket
-        .to(room)
-        .broadcast.emit("VIDEO_PAUSE", rooms[room].currentVideo.state);
+      rooms[room].currentVideo.pause(data.currTime);
+      io.to(room).emit("VIDEO_PAUSE", rooms[room].currentVideo);
     });
 
     socket.on("VIDEO_BUFFER", (data) => {
