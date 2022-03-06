@@ -19,7 +19,7 @@ Please follow these simple steps to start working:<br>
 **2.**  Clone your forked copy of the project.
 
 ```
-git clone https://github.com/FABhishek/WatchPawrii/tree/main
+git clone --branch main https://github.com/FABhishek/WatchPawrii/tree/main
 ```
 
 **3.** Navigate to your project directory and open it in your code editor. :file_folder: .
