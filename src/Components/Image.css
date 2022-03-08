@@ -1,0 +1,9 @@
+.image {
+  z-index: 10;
+}
+@media screen and (max-width: 991px) {
+  .image {
+    width: 70%;
+    height: 70%;
+  }
+}

@@ -1,0 +1,32 @@
+.bar {
+  padding: 1rem 2rem;
+  height: 6rem;
+}
+.u {
+  display: flex;
+  align-items: center;
+  font-family: "Montserrat Alternates", sans-serif;
+  color: #fff;
+  font-size: 1.5rem;
+  margin-bottom: 0 !important;
+  gap: 0.5rem;
+}
+.line {
+  color: rgb(255, 255, 255);
+  margin: 0;
+  width: 100%;
+  height: 3px !important;
+  border-width: 0;
+}
+.title {
+  color: #fff;
+  font-size: 1.5rem;
+}
+@media screen and (max-width: 991px) {
+  .title {
+    font-size: 1rem;
+  }
+  .u {
+    padding-left: 0;
+  }
+}
