@@ -9,6 +9,7 @@ import io from "socket.io-client";
 import Messages from "../messaging/messages";
 import MessageInput from "../messaging/messageinput";
 import AudioChat from "../messaging/audio";
+import RoomId from "./RoomId";
 
 function Room() {
   const [vidLink, getVidLink] = useState("");
@@ -99,7 +100,7 @@ function Room() {
         <a className="textColor" href="/">
           <h1>WatchPawri!!!!</h1>
         </a>
-        <h2> {room}</h2>
+        <RoomId roomId={room} />
         <a className="textColor" href="/">
           <FontAwesome className="fas fa-sign-out alt" name="sign out" />
         </a>
@@ -108,8 +109,7 @@ function Room() {
         <div className="video-container">
           <form
             // onSubmit={getLink}
-            className="search-form"
-          >
+            className="search-form">
             <input
               autoFocus
               type="text"
