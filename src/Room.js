@@ -6,9 +6,9 @@ import "font-awesome/css/font-awesome.min.css";
 import FontAwesome from "react-fontawesome";
 import ReactPlayer from "react-player";
 import io from "socket.io-client";
-import Messages from "../messaging/messages";
-import MessageInput from "../messaging/messageinput";
-import AudioChat from "../messaging/audio";
+import Messages from "./messaging/messages";
+import MessageInput from "./messaging/messageinput";
+import AudioChat from "./messaging/audio";
 import RoomId from "./RoomId";
 
 function Room() {
