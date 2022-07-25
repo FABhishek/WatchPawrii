@@ -75,19 +75,22 @@ function Room() {
   const [audioVisible, setAudioVisible] = useState(false);
   const [userVisible, setUserVisible] = useState(false);
 
-  function makeChatVisible() {
+  function makeChatVisible(event) {
+    event.preventDefault();
     setChatVisible(true);
     setAudioVisible(false);
     setUserVisible(false);
   }
 
-  function makeAudioVisible() {
+  function makeAudioVisible(event) {
+    event.preventDefault();
     setChatVisible(false);
     setAudioVisible(true);
     setUserVisible(false);
   }
 
-  function makeUserVisible() {
+  function makeUserVisible(event) {
+    event.preventDefault();
     setChatVisible(false);
     setAudioVisible(false);
     setUserVisible(true);
@@ -166,6 +169,9 @@ function Room() {
             <div className="side-bar-audio">
               <AudioChat />
             </div>
+          )}
+          {userVisible && (
+            <div className="Side-bar">{<div>Under Process....</div>}</div>
           )}
         </div>
       </div>

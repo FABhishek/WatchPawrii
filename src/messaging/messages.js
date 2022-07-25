@@ -1,36 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import './messages.css';
+import React, { useEffect, useState } from "react";
+import "./messages.css";
 
 function Messages({ socket }) {
-  const [messages, setMessages] = useState({});
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     const messageListener = (message) => {
-      setMessages((prevMessages) => {
-        const newMessages = {...prevMessages};
-        newMessages[message.id] = message;
-        return newMessages;
-      });
+      // setMessages((prevMessages) => {
+      //   const newMessages = { ...prevMessages };
+      //   newMessages[message.id] = message;
+      console.log("messageListener", message);
+      //   return newMessages;
+      // });
+      setMessages((prevMessages) => [...prevMessages, message]);
+      // setMessages({ message });
     };
-  
+
     const deleteMessageListener = (messageID) => {
       setMessages((prevMessages) => {
-        const newMessages = {...prevMessages};
+        const newMessages = { ...prevMessages };
         delete newMessages[messageID];
         return newMessages;
       });
     };
-  
-    socket.on('message', messageListener);
-    socket.on('deleteMessage', deleteMessageListener);
-    socket.emit('getMessages');
+
+    socket.on("message", messageListener);
+    // console.log("messageListener", messageListener);
+    socket.on("deleteMessage", deleteMessageListener);
+    socket.emit("getMessages");
 
     return () => {
-      socket.off('message', messageListener);
-      socket.off('deleteMessage', deleteMessageListener);
+      socket.off("message", messageListener);
+      socket.off("deleteMessage", deleteMessageListener);
     };
   }, [socket]);
-
+  console.log("messages", messages);
   return (
     <div className="message-list">
       {[...Object.values(messages)]
@@ -39,14 +43,13 @@ function Messages({ socket }) {
           <div
             key={message.id}
             className="message-container d-flex flex-colum"
-            title={`Sent at ${new Date(message.time).toLocaleTimeString()}`}
+            // title={`Sent at ${new Date(message.time).toLocaleTimeString()}`}
           >
-            <span className="user">{message.user.name}:</span>
-            <span className="message">{message.value}</span>
-            <span className="date">{new Date(message.time).toLocaleTimeString()}</span>
+            <span className="user">{message.username}:</span>
+            <span className="message">{message.text}</span>
+            <span className="date">{new Date().toLocaleTimeString()}</span>
           </div>
-        ))
-      }
+        ))}
     </div>
   );
 }

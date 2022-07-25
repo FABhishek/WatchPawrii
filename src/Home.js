@@ -4,15 +4,12 @@ import Modal from "react-modal";
 import "./Home.css";
 import { v4 as uuid } from "uuid";
 
-
-
 import axios from "axios";
 import { io } from "socket.io-client";
 import { useNavigate } from "react-router-dom";
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [roomId, setroomId] = useState("");
-
   function toggleModal() {
     setIsOpen(!isOpen);
   }
@@ -41,7 +38,6 @@ const Home = () => {
 
   function createRoom(e) {
     axios.get("http://localhost:5000/room").then((res) => {
-      // console.log(res.data);
       navigate("room=/" + `${res.data.room}`);
     });
   }

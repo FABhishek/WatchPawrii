@@ -55,6 +55,7 @@ io.on("connection", (socket) => {
   // Join room
   socket.on("joinRoom", ({ room }) => {
     const users = rooms[room].users;
+
     const user = userJoin(users, socket.id);
 
     socket.join(room);
@@ -63,21 +64,22 @@ io.on("connection", (socket) => {
     // CHAT EVENTS
 
     // Welcome current user
-    // socket.emit("message", formatMessage(botName, "Welcome to weWatch!"));
+    socket.emit("message", formatMessage(botName, "Welcome to weWatch!"));
 
-    // Broadcasts message when a user connects
-    // socket.broadcast
-    //   .to(room)
-    //   .emit("message", formatMessage(botName, `${user} has joined the room`));
+    // // Broadcasts message when a user connects
+    socket.broadcast
+      .to(room)
+      .emit("message", formatMessage(botName, `${user} has joined the room`));
 
-    // Send users list to room
+    // // Send users list to room
+
     // io.to(room).emit("roomUsers", { users });
 
     // console.log("line 76 rooms:", rooms);
 
-    // socket.on("chatMessage", (msg) => {
-    //   io.to(room).emit("message", formatMessage(user, msg));
-    // });
+    socket.on("chatMessage", (msg) => {
+      io.to(room).emit("message", formatMessage(user, msg));
+    });
 
     // VIDEO EVENTS
 
@@ -157,7 +159,7 @@ io.on("connection", (socket) => {
       userLeave(users, socket.id);
 
       // Send updated users to room
-      io.to(room).emit("roomUsers", { users });
+      // io.to(room).emit("roomUsers", { users });
 
       // Delete room if there are no users
       // if (Object.keys(rooms[room].users).length === 0) delete rooms[room];
