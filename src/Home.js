@@ -25,7 +25,7 @@ const Home = () => {
   const navigate = useNavigate();
   function joinRoom() {
     axios
-      .get("http://localhost:5000/join", {
+      .get("/join", {
         params: {
           roomId: roomId,
         },
@@ -37,7 +37,7 @@ const Home = () => {
   }
 
   function createRoom(e) {
-    axios.get("http://localhost:5000/room").then((res) => {
+    axios.get("/room").then((res) => {
       navigate("room=/" + `${res.data.room}`);
     });
   }

@@ -48,7 +48,9 @@
     "eject": "react-scripts eject",
     "client": "npm start ",
     "server": " npm start --prefix Server && nodemon server.js",
-    "dev": "concurrently \"npm run client\" \"npm run server\""
+    "dev": "concurrently \"npm run client\" \"npm run server\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix Server && npm start --prefix Server" 
+
   },
   "eslintConfig": {
     "extends": [
