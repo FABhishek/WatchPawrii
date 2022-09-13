@@ -1,5 +1,5 @@
 # Watch-In-Sync
-
+ deployed Site : https://wpfront-vert.vercel.app/
 ![Screenshot (226)](https://user-images.githubusercontent.com/59495320/155945898-58a18391-ec8e-49c1-9ffc-39f7417f332a.png)
 
 ![Screenshot (227)](https://user-images.githubusercontent.com/59495320/155945897-04663c26-6b36-451b-ad08-9078c2031116.png)
